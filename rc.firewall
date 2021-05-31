@@ -41,7 +41,7 @@
 # 1.1. Internet ip address
 # 
 #
-Internet_IP="10.0.1.x"
+Internet_IP="10.0.1.4"
 Internet_IP_RANGE="10.0.1.0/24"
 Internet_BCAST_ADRESS="10.0.1.255"
 Internet_IFACE="enp0s8"
@@ -54,7 +54,7 @@ Internet_IFACE="enp0s8"
 #
 # IP addresses of the client-side network
 #
-Client_NET_IP="10.0.2.y"
+Client_NET_IP="10.0.2.15"
 Client_NET_IP_RANGE="10.0.2.0/24"
 Client_NET_BCAST_ADRESS="10.0.2.255"
 Client_NET_IFACE="enp0s3"
@@ -67,7 +67,7 @@ LO_IFACE="lo"
 LO_IP="127.0.0.1"
 WEB_IP_ADDRESS="127.0.0.1"
 #IP aliases for NATed services (this is the GW's ip on client network)
-NAT_WEB_IP_ADDRESS="10.0.2.y"
+NAT_WEB_IP_ADDRESS="10.0.2.4"
 
 ####
 # 1.4 IPTables Configuration.
