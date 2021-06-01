@@ -259,8 +259,8 @@ $IPTABLES -P FORWARD DROP
 
 # Allow http traffic from client network to server network
 //Deependra Parajuli: Forward rules to allow http traffic 
-#$IPTABLES -A FORWARD -i enp0s3 -o enp0s8 -p tcp --dport 80 -j ACCEPT   
-#$IPTABLES -A FORWARD -i enp0s8 -o enp0s3 -p tcp --sport 80 -j ACCEPT 
+#$IPTABLES -A FORWARD -i enp0s3 -o enp0s8 -p tcp --dport 80 -j ACCEPT             //Deependra Parajuli: Forward rules to allow http traffic  
+#$IPTABLES -A FORWARD -i enp0s8 -o enp0s3 -p tcp --sport 80 -j ACCEPT             //Deependra Parajuli: Forward rules to allow http traffic 
 
 # example of using allowed
 #$IPTABLES -A FORWARD -p tcp -j allowed
@@ -278,7 +278,7 @@ $IPTABLES -P FORWARD DROP
 
 //Deependra Parajuli: Input rules to allow web traffic from client
 
-#IPTABLES -A INPUT -p TCP --dport 80 -i enp0s3 -m state --state NEW, ESTABLISHED -j ACCEPT
+#IPTABLES -A INPUT -p TCP --dport 80 -i enp0s3 -m state --state NEW, ESTABLISHED -j ACCEPT          //Deependra Parajuli: Input rules to allow web traffic from client
 
 
 
@@ -304,7 +304,7 @@ $IPTABLES -A INPUT -p icmp -j ACCEPT
 #
 # Provide your output rules below to allow web traffic (port 80) go back to client
 //Deependra Parajuli: Rule to allow web traffic (port 80) go back to client
-#IPTABLES -A OUTPUT -p TCP --sport 80 -o enp0s3 -m state --state ESTABLISHED -j ACCEPT
+#IPTABLES -A OUTPUT -p TCP --sport 80 -o enp0s3 -m state --state ESTABLISHED -j ACCEPT          //Deependra Parajuli: Rule to allow web traffic (port 80) go back to clientForward rules to allow http traffic 
 
 
 # example Allowed ping message back to client 
@@ -324,7 +324,7 @@ $IPTABLES -A INPUT -p icmp -j ACCEPT
 # Provide your NAT PREROUTING rules (packets come into your private domain)
 //Deependra Parajuli: NAT PREROUTING Rule
 
-#IPTABLES -t nat -A PREROUTING -i enp0s3 -p tcp --dport 80 -j DNAT --to 10.0.2.15:80
+#IPTABLES -t nat -A PREROUTING -i enp0s3 -p tcp --dport 80 -j DNAT --to 10.0.2.15:80            //Deependra Parajuli: NAT PREROUTING Rule
 
 #
 # Example of enable http to internal web server behind the firewall (port forwarding)
@@ -343,14 +343,14 @@ $IPTABLES -A INPUT -p icmp -j ACCEPT
 #
 # Provide your NAT PREROUTING rules (packets go to the internet domain)
 //Deependra Parajuli: Nat PREROUTING rules
-#IPTABLES -t nat -A PREROUTING -i enp0s3 -p tcp --dport 80 -j DNAT --to 10.0.2.15:80
+#IPTABLES -t nat -A PREROUTING -i enp0s3 -p tcp --dport 80 -j DNAT --to 10.0.2.15:80            //Deependra Parajuli: Nat PREROUTING rules
 
 
 # Add your own rule below to only allow ping from client to 8.8.8.8 on internet
 //DEEPENDA PARAJULI: Rule to only allow ping from client to 8.8.8.8 on internet along with Masquerade
-#IPTABLES -A FORWARD -s 10.0.2.15 -d 8.8.8.8 -p icmp --icmp-type any -j ACCEPT
-#IPTABLES -A FORWARD -s 8.8.8.8 -d 10.0.2.15 -p icmp --icmp-type any -j ACCEPT
-#$IPTABLES -t nat -A POSTROUTING -o enp0s8 -j MASQUERADE
+#IPTABLES -A FORWARD -s 10.0.2.15 -d 8.8.8.8 -p icmp --icmp-type any -j ACCEPT                  //Deependra Parajuli: Rule to only allow ping from client to 8.8.8.8 on internet along with Masquerade
+#IPTABLES -A FORWARD -s 8.8.8.8 -d 10.0.2.15 -p icmp --icmp-type any -j ACCEPT                  //Deependra Parajuli: Rule to only allow ping from client to 8.8.8.8 on internet along with Masquerade
+#$IPTABLES -t nat -A POSTROUTING -o enp0s8 -j MASQUERADE                                        //Deependra Parajuli: Rule to only allow ping from client to 8.8.8.8 on internet along with Masquerade
 
 # Example: Allow client node to access to all Internet using masquerade
 # $IPTABLES -t nat -A POSTROUTING -o $Internet_IFACE -j MASQUERADE
